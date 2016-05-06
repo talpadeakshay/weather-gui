@@ -1,14 +1,20 @@
 var services = angular.module('weather.service',[])
 .constant('Url', {
 	HOST: 'http://localhost:8080/weatherreport',
-    WEATHER_CITY_LIST: '/getCityList'    
+    GET_CITY_LIST: '/getCityList',
+    GET_CITY_WEATHER: '/getCityWeather'
 });
 
 services.service('WeatherService', function($http, $q, Url){
 	
 	this.getCityList = function() {
-		return sendRequest(Url.HOST + Url.WEATHER_CITY_LIST);
+		return sendRequest(Url.HOST + Url.GET_CITY_LIST);
 	};
+	
+	this.getCityWeather = function(cityId){
+		return sendRequest(Url.HOST + Url.GET_CITY_WEATHER + '/' +cityId);
+	};	
+	
 	
 	var sendRequest = function(url) {
         var promise = $http.get(url)

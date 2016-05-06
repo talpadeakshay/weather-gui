@@ -12,4 +12,14 @@ weatherApp.controller('WeatherCtrl',
 
 			inits.push(initCityList);
 			$q.all(inits);
+			
+			$scope.getCityWeather = function(cityId) {
+
+				var cityWeather = WeatherService.getCityWeather(cityId).then(
+					function(promise) {
+						$scope.static.cityWeather = promise.data;
+					});
+				
+			};
 		});
+

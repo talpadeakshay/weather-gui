@@ -16,6 +16,10 @@
 					<option ng-repeat="option in static.cityList" value="{{option.id}}">{{option.name}}</option>
 			</select></td>
 		</tr>
+		
+		<tr>
+			<td><input type="button" ng-click="getCityWeather('1234')"></td>
+		</tr>
 	</table>
 </body>
 </html>

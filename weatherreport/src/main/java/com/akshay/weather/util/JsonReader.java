@@ -74,7 +74,7 @@ public class JsonReader {
 	public static void main(String[] args) throws IOException, JSONException {
 		org.json.JSONObject json = readJsonFromUrl("http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID=816150473629483737aadaf7fa40c57e");
 		System.out.println(json.toString());
-		System.out.println(json.get("id"));
+		//System.out.println(json.get("city"));
 
 		/*
 		 * try { String json = readJsonFromUrl(
