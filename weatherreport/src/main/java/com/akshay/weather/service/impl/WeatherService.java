@@ -1,0 +1,79 @@
+package com.akshay.weather.service.impl;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
+
+import com.akshay.weather.dto.impl.CityDto;
+import com.akshay.weather.dto.impl.CityWeatherDto;
+import com.akshay.weather.service.IWeatherService;
+import com.akshay.weather.util.JsonReaderUtil;
+
+@Service
+public class WeatherService implements IWeatherService {
+
+	@Autowired
+	Environment env;
+
+	@Value("${open.weather.map.url}")
+	private String weatherMapUrl;
+
+	@Value("${open.weather.map.appId}")
+	private String weatherMapAppId;
+
+	@Value("${open.weather.map.units}")
+	private String weatherMapTempUnits;
+
+	@Value("${open.weather.map.initial.city}")
+	private String initaialCity;
+
+	@Value("${open.weather.map.initial.city.id}")
+	private String initialCityId;
+
+	public List<CityDto> getCityList() {
+		List<CityDto> lstCity = new ArrayList<CityDto>();
+
+		String[] arrInitialCity = initaialCity.split(",");
+		String[] arrInitialCityId = initialCityId.split(",");
+		CityDto dto = null;
+		for (int i = 0; i < arrInitialCityId.length; i++) {
+			dto = new CityDto(Long.valueOf(arrInitialCityId[i]), arrInitialCity[i]);
+			lstCity.add(dto);
+		}
+		return lstCity;
+	}
+
+	public CityWeatherDto getCityWeather(String cityId) {
+		CityWeatherDto cityWeather = null;
+		try {
+			String url = weatherMapUrl + cityId + weatherMapAppId + weatherMapTempUnits;
+			JSONObject json = JsonReaderUtil.readJsonFromUrl(url);
+			JSONObject jsonMain = (JSONObject) json.get("main");
+			JSONArray jsonWeather = (JSONArray) json.get("weather");
+			JSONObject jsonWeatherObj = (JSONObject) jsonWeather.get(0);
+			JSONObject jsonWind = (JSONObject) json.get("wind");
+			
+			cityWeather = new CityWeatherDto();
+			cityWeather.setCityId(Long.valueOf(cityId));
+			cityWeather.setCityName(json.get("name").toString());			
+			cityWeather.setTemp(Double.valueOf(jsonMain.get("temp").toString()));
+			cityWeather.setWeatherDescription(jsonWeatherObj.get("description").toString());
+			cityWeather.setWindSpeed(Double.valueOf(jsonWind.get("speed").toString()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return cityWeather;
+	}
+
+}

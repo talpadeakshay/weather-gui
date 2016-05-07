@@ -13,12 +13,35 @@
 	<table>
 		<tr>
 			<td><select ng-model="cityId">
-					<option ng-repeat="option in static.cityList" value="{{option.id}}">{{option.name}}</option>
+					<option ng-repeat="option in static.cityList"
+						value="{{option.cityId}}">{{option.cityName}}</option>
 			</select></td>
+		
+			<td><input type="button" value="Check Temperature"  ng-click="getCityWeather()"></td>
 		</tr>
 		
+	</table>
+	<br>
+	<table border="1" width="50%">
 		<tr>
-			<td><input type="button" ng-click="getCityWeather('1234')"></td>
+			<th width="25%" align="left">City</th>
+			<td>{{cityWeather.cityName}}</td>
+		</tr>
+		<tr>
+			<th align="left">Updated time</th>
+			<td>{{cityWeather.updatedDate}}</td>
+		</tr>
+		<tr>
+			<th align="left">Weather</th>
+			<td>{{cityWeather.weatherDescription}}</td>
+		</tr>
+		<tr>
+			<th align="left">Temperature</th>
+			<td>{{cityWeather.temp}}</td>
+		</tr>
+		<tr>
+			<th align="left">Wind</th>
+			<td>{{cityWeather.windSpeed}}</td>
 		</tr>
 	</table>
 </body>

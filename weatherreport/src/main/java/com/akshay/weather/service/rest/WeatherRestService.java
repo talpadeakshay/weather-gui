@@ -1,34 +1,31 @@
 package com.akshay.weather.service.rest;
 
-import javax.ws.rs.PathParam;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.akshay.weather.util.JsonReader;
+import com.akshay.weather.dto.impl.CityDto;
+import com.akshay.weather.dto.impl.CityWeatherDto;
+import com.akshay.weather.service.IWeatherService;
 
 @RestController
 public class WeatherRestService {
 
-	@RequestMapping("/getCityList")
-	public String getCityList() {
-		String json = null;
-		try {
-			json = JsonReader.getJsonListFromFile("D:/programs/git/weather-gui/weatherreport/src/main/resources/weather/city.list.json").toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		 
-		return json;
+	@Autowired
+	private IWeatherService service;
+
+	@RequestMapping(value = "/getCityList", method = RequestMethod.GET, headers = "Accept=application/json")
+	public List<CityDto> getCityList() {
+		return service.getCityList();
 	}
-	
+
 	@RequestMapping("/getCityWeather/{cityId}")
-	public String getCityWeather(@PathParam("cityId") String cityId) {
-		String json = null;
-		try {
-			json = JsonReader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID=816150473629483737aadaf7fa40c57e&units=metric").toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		 
-		return json;
+	public CityWeatherDto getCityWeather(@PathVariable("cityId") String cityId) {
+		
+		return service.getCityWeather(cityId);
 	}
 }
