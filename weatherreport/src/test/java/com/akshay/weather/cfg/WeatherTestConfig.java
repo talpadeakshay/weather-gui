@@ -8,7 +8,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import com.akshay.weather.service.IWeatherService;
 import com.akshay.weather.service.impl.WeatherService;
 
-@Configuration
 @PropertySource(value = { "classpath:/weather/weatherApi.properties" })
 public class WeatherTestConfig {
 
