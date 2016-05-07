@@ -7,6 +7,7 @@
 <script src="resources/scripts/angular.min.js"></script>
 <script src="resources/scripts/weather.js"></script>
 <script src="resources/scripts/WeatherService.js"></script>
+<script src="resources/scripts/currentWeatherDirective.js"></script>
 </head>
 <body ng-app="weather" ng-controller="WeatherCtrl">
 
@@ -16,33 +17,15 @@
 					<option ng-repeat="option in static.cityList"
 						value="{{option.cityId}}">{{option.cityName}}</option>
 			</select></td>
-		
-			<td><input type="button" value="Check Temperature"  ng-click="getCityWeather()"></td>
+
+			<td><input type="button" value="Check Temperature"
+				ng-click="getCityWeather()"></td>
 		</tr>
-		
+
 	</table>
 	<br>
-	<table border="1" width="50%">
-		<tr>
-			<th width="25%" align="left">City</th>
-			<td>{{cityWeather.cityName}}</td>
-		</tr>
-		<tr>
-			<th align="left">Updated time</th>
-			<td>{{cityWeather.updatedDate}}</td>
-		</tr>
-		<tr>
-			<th align="left">Weather</th>
-			<td>{{cityWeather.weatherDescription}}</td>
-		</tr>
-		<tr>
-			<th align="left">Temperature</th>
-			<td>{{cityWeather.temp}}</td>
-		</tr>
-		<tr>
-			<th align="left">Wind</th>
-			<td>{{cityWeather.windSpeed}}</td>
-		</tr>
-	</table>
+
+	<disp-weather></disp-weather>
+
 </body>
 </html>

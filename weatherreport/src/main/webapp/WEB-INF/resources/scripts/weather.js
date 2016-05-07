@@ -1,4 +1,4 @@
-var weatherApp = angular.module('weather', [ 'weather.service' ]);
+var weatherApp = angular.module('weather', [ 'weather.service' ,'weatherDirective']);
 
 weatherApp.controller('WeatherCtrl',
 		function($scope, WeatherService, $q, $http) {

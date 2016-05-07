@@ -1,7 +1,9 @@
 package com.akshay.weather.service.impl;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -57,16 +59,17 @@ public class WeatherService implements IWeatherService {
 			String url = weatherMapUrl + cityId + weatherMapAppId + weatherMapTempUnits;
 			JSONObject json = JsonReaderUtil.readJsonFromUrl(url);
 			JSONObject jsonMain = (JSONObject) json.get("main");
-			JSONArray jsonWeather = (JSONArray) json.get("weather");
+			JSONArray jsonWeather = (JSONArray) json.get("weather");			
+			Date updtDate =  new Date(Long.valueOf(json.get("dt").toString()) * 1000);
 			JSONObject jsonWeatherObj = (JSONObject) jsonWeather.get(0);
 			JSONObject jsonWind = (JSONObject) json.get("wind");
-			
 			cityWeather = new CityWeatherDto();
 			cityWeather.setCityId(Long.valueOf(cityId));
-			cityWeather.setCityName(json.get("name").toString());			
-			cityWeather.setTemp(Double.valueOf(jsonMain.get("temp").toString()));
+			cityWeather.setUpdatedDate(updtDate);
+			cityWeather.setCityName(json.get("name").toString());
+			cityWeather.setTemp(jsonMain.get("temp").toString());
 			cityWeather.setWeatherDescription(jsonWeatherObj.get("description").toString());
-			cityWeather.setWindSpeed(Double.valueOf(jsonWind.get("speed").toString()));
+			cityWeather.setWindSpeed(jsonWind.get("speed").toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {

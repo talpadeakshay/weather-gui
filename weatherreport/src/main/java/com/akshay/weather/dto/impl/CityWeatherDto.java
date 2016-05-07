@@ -9,9 +9,12 @@ public class CityWeatherDto {
 	protected String cityCountry;
 	protected Date updatedDate;
 	protected String weatherDescription;
-	protected Double temp;
-	protected Double windSpeed;	
-	
+	protected String temp;
+	protected String windSpeed;
+
+	private static final String DEGREE = "\u00b0";
+	private static final String SPEED_UNIT = "mtr/sec";
+
 	public Long getCityId() {
 		return cityId;
 	}
@@ -52,19 +55,19 @@ public class CityWeatherDto {
 		this.weatherDescription = weatherDescription;
 	}
 
-	public Double getTemp() {
-		return temp;
+	public String getTemp() {
+		return temp + " " + DEGREE + "C";
 	}
 
-	public void setTemp(Double temp) {
+	public void setTemp(String temp) {
 		this.temp = temp;
 	}
 
-	public Double getWindSpeed() {
-		return windSpeed;
+	public String getWindSpeed() {
+		return windSpeed + " " + SPEED_UNIT;
 	}
 
-	public void setWindSpeed(Double windSpeed) {
+	public void setWindSpeed(String windSpeed) {
 		this.windSpeed = windSpeed;
 	}
 
