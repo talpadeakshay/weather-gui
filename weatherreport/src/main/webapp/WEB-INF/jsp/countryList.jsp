@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script src="resources/scripts/angular.min.js"></script>
-<script src="resources/scripts/weather.js"></script>
-<script src="resources/scripts/WeatherService.js"></script>
-<script src="resources/scripts/currentWeatherDirective.js"></script>
+<script src="resources/scripts/controller/weather.js"></script>
+<script src="resources/scripts/service/weatherService.js"></script>
+<script src="resources/scripts/directive/currentWeatherDirective.js"></script>
 </head>
 <body ng-app="weather" ng-controller="WeatherCtrl">
 
