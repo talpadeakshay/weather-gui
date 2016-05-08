@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.akshay.weather.cfg.WeatherTestConfig;
-
+import com.akshay.weather.dto.impl.CityWeatherDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = { WeatherTestConfig.class })
@@ -20,11 +20,17 @@ public class WeatherServiceTest {
 
 	@Test
 	public void loadInitialCityList() {
-		Assert.assertNotNull(service.getCityList());
+		Assert.assertEquals(3, service.getCityList().size());
 	}
-	
+
 	@Test
 	public void getCityWeather() {
-		Assert.assertNotNull(service.getCityWeather("2147714"));
+		CityWeatherDto dto = service.getCityWeather("2147714");
+		Assert.assertEquals("Sydney", dto.getCityName());
+	}
+
+	@Test
+	public void addCity() {
+		Assert.assertEquals(4, service.addCity("2153391", "Perth").size());
 	}
 }
