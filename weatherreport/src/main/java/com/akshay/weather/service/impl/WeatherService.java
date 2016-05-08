@@ -1,7 +1,6 @@
 package com.akshay.weather.service.impl;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,8 +39,9 @@ public class WeatherService implements IWeatherService {
 	@Value("${open.weather.map.initial.city.id}")
 	private String initialCityId;
 
+	private List<CityDto> lstCity = new ArrayList<CityDto>();
+
 	public List<CityDto> getCityList() {
-		List<CityDto> lstCity = new ArrayList<CityDto>();
 
 		String[] arrInitialCity = initaialCity.split(",");
 		String[] arrInitialCityId = initialCityId.split(",");
@@ -53,14 +53,20 @@ public class WeatherService implements IWeatherService {
 		return lstCity;
 	}
 
+	public List<CityDto> addCity(String cityId, String cityName) {
+		CityDto dto = new CityDto(Long.valueOf(cityId), cityName);
+		lstCity.add(dto);
+		return lstCity;
+	}
+
 	public CityWeatherDto getCityWeather(String cityId) {
 		CityWeatherDto cityWeather = null;
 		try {
 			String url = weatherMapUrl + cityId + weatherMapAppId + weatherMapTempUnits;
 			JSONObject json = JsonReaderUtil.readJsonFromUrl(url);
 			JSONObject jsonMain = (JSONObject) json.get("main");
-			JSONArray jsonWeather = (JSONArray) json.get("weather");			
-			Date updtDate =  new Date(Long.valueOf(json.get("dt").toString()) * 1000);
+			JSONArray jsonWeather = (JSONArray) json.get("weather");
+			Date updtDate = new Date(Long.valueOf(json.get("dt").toString()) * 1000);
 			JSONObject jsonWeatherObj = (JSONObject) jsonWeather.get(0);
 			JSONObject jsonWind = (JSONObject) json.get("wind");
 			cityWeather = new CityWeatherDto();
