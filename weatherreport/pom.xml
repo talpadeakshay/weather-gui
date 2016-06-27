@@ -17,6 +17,7 @@
 		<jackson.serilizer.version>2.7.4</jackson.serilizer.version>
 		<jetty.version>9.2.13.v20150730</jetty.version>
 		<maven.jetty.plugin.version>${jetty.version}</maven.jetty.plugin.version>
+		<jersey.server.version>1.19</jersey.server.version>
 	</properties>
 
 
@@ -88,6 +89,21 @@
 			<artifactId>json</artifactId>
 			<version>20160212</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>${jersey.server.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-transports-http -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>3.1.6</version>
+		</dependency>
+
+
 
 	</dependencies>
 
