@@ -9,6 +9,8 @@ public interface IWeatherService {
 	public List<CityDto> getCityList();
 
 	public CityWeatherDto getCityWeather(String cityId);
-	
+
+	public CityWeatherDto getCityWeather();
+
 	public List<CityDto> addCity(String cityId, String cityName);
 }

@@ -1,6 +1,6 @@
 var services = angular.module('weather.service',[])
 .constant('Url', {
-	HOST: 'http://localhost:8080/weatherreport',
+	HOST: 'http://localhost:8080/weather',
     GET_CITY_LIST: '/getCityList',
     GET_CITY_WEATHER: '/getCityWeather'
 });

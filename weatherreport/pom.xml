@@ -15,6 +15,9 @@
 		<servlet.api.version>3.1.0</servlet.api.version>
 		<maven.war.plugin.version>2.6</maven.war.plugin.version>
 		<jackson.serilizer.version>2.7.4</jackson.serilizer.version>
+		
+		<jetty.version>9.2.13.v20150730</jetty.version>
+		<maven.jetty.plugin.version>${jetty.version}</maven.jetty.plugin.version>
 	</properties>
 
 
@@ -98,6 +101,19 @@
 				<version>${maven.war.plugin.version}</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${maven.jetty.plugin.version}</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/weather</contextPath>
+					</webApp>
+					<!-- <jettyXml>jetty.xml</jettyXml> -->
 				</configuration>
 			</plugin>
 		</plugins>

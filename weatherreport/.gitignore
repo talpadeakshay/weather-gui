@@ -1,0 +1,15 @@
+/.svn
+/.settings
+**/.settings
+/.project
+**/.project
+**/.classpath
+/.classpath
+/.idea
+**/target
+**/*.iml
+**/*.xsd
+**/*.db
+**/*.iml
+.metadata
+RemoteSystemsTempFiles

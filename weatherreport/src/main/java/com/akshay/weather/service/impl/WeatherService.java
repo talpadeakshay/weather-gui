@@ -85,4 +85,16 @@ public class WeatherService implements IWeatherService {
 		return cityWeather;
 	}
 
+	public CityWeatherDto getCityWeather() {
+		CityWeatherDto weather = new CityWeatherDto();
+		weather.setCityCountry("Australia");
+		weather.setCityId(1L);
+		weather.setCityName("Sydney");
+		weather.setTemp("40C");
+		weather.setUpdatedDate(new Date());
+		weather.setWeatherDescription("Cloudy");
+		weather.setWindSpeed("10");
+		return weather;
+	}
+
 }

@@ -25,7 +25,7 @@ public class WeatherRestService {
 
 	@RequestMapping("/getCityWeather/{cityId}")
 	public CityWeatherDto getCityWeather(@PathVariable("cityId") String cityId) {
-		
-		return service.getCityWeather(cityId);
+
+		return service.getCityWeather();
 	}
 }
